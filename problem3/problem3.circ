@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project source="5.0.0" version="1.0">
+  This file is intended to be loaded by Logisim-evolution v5.0.0(https://github.com/logisim-evolution/).
+
+  <lib desc="#Wiring" name="0">
+    <tool name="Pin">
+      <a name="appearance" val="classic"/>
+    </tool>
+  </lib>
+  <lib desc="#Gates" name="1"/>
+  <lib desc="#Plexers" name="2"/>
+  <lib desc="#Arithmetic" name="3"/>
+  <lib desc="#FPArithmetic" name="4"/>
+  <lib desc="#Memory" name="5"/>
+  <lib desc="#I/O" name="6"/>
+  <lib desc="#TTL" name="7"/>
+  <lib desc="#TCL" name="8"/>
+  <lib desc="#Base" name="9"/>
+  <lib desc="#BFH-Praktika" name="10"/>
+  <lib desc="#Input/Output-Extra" name="11"/>
+  <lib desc="#Soc" name="12"/>
+  <main name="main"/>
+  <options>
+    <a name="gateUndefined" val="ignore"/>
+    <a name="simlimit" val="1000"/>
+    <a name="simrand" val="0"/>
+  </options>
+  <mappings>
+    <tool map="Button2" name="Poke Tool"/>
+    <tool map="Button3" name="Menu Tool"/>
+    <tool map="Ctrl Button1" name="Menu Tool"/>
+  </mappings>
+  <toolbar>
+    <tool name="Poke Tool"/>
+    <tool name="Edit Tool"/>
+    <tool name="Wiring Tool"/>
+    <tool name="Text Tool"/>
+    <tool name="Image"/>
+    <sep/>
+    <tool name="Pin"/>
+    <tool name="Pin">
+      <a name="facing" val="west"/>
+      <a name="type" val="output"/>
+    </tool>
+    <sep/>
+    <tool name="NOT Gate"/>
+    <tool name="AND Gate"/>
+    <tool name="OR Gate"/>
+    <tool name="XOR Gate"/>
+    <tool name="NAND Gate"/>
+    <tool name="NOR Gate"/>
+    <sep/>
+    <tool name="D Flip-Flop"/>
+    <tool name="Register"/>
+  </toolbar>
+  <circuit name="main">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="main"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="0" loc="(250,270)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="width" val="3"/>
+    </comp>
+    <comp lib="0" loc="(570,220)" name="Splitter">
+      <a name="fanout" val="8"/>
+      <a name="incoming" val="8"/>
+    </comp>
+    <comp lib="6" loc="(650,40)" name="7-Segment Display"/>
+    <comp loc="(540,260)" name="seg7_letters"/>
+    <wire from="(250,270)" to="(260,270)"/>
+    <wire from="(260,260)" to="(260,270)"/>
+    <wire from="(260,260)" to="(320,260)"/>
+    <wire from="(540,260)" to="(570,260)"/>
+    <wire from="(570,220)" to="(570,260)"/>
+    <wire from="(570,260)" to="(590,260)"/>
+    <wire from="(580,210)" to="(590,210)"/>
+    <wire from="(590,140)" to="(680,140)"/>
+    <wire from="(590,150)" to="(640,150)"/>
+    <wire from="(590,160)" to="(690,160)"/>
+    <wire from="(590,170)" to="(650,170)"/>
+    <wire from="(590,180)" to="(660,180)"/>
+    <wire from="(590,190)" to="(670,190)"/>
+    <wire from="(590,200)" to="(700,200)"/>
+    <wire from="(590,210)" to="(710,210)"/>
+    <wire from="(640,40)" to="(640,150)"/>
+    <wire from="(640,40)" to="(650,40)"/>
+    <wire from="(650,100)" to="(650,170)"/>
+    <wire from="(660,100)" to="(660,180)"/>
+    <wire from="(660,30)" to="(660,40)"/>
+    <wire from="(660,30)" to="(690,30)"/>
+    <wire from="(670,100)" to="(670,190)"/>
+    <wire from="(670,20)" to="(670,40)"/>
+    <wire from="(670,20)" to="(710,20)"/>
+    <wire from="(680,100)" to="(680,140)"/>
+    <wire from="(680,40)" to="(700,40)"/>
+    <wire from="(690,30)" to="(690,160)"/>
+    <wire from="(700,40)" to="(700,200)"/>
+    <wire from="(710,20)" to="(710,210)"/>
+  </circuit>
+  <vhdl appearance="logisim_evolution" name="seg7_letters">
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity seg7_letters is
+    port(
+        sel : in std_logic_vector(2 downto 0);
+        display : out std_logic_vector(7 downto 0)
+    );
+end entity seg7_letters;
+
+architecture bhv of seg7_letters is
+begin
+    process(sel)
+    begin
+        case sel is
+            when "000" =&gt; display &lt;= "11111010"; -- a
+            when "001" =&gt; display &lt;= "00111110"; -- b
+            when "010" =&gt; display &lt;= "00011010"; -- c
+            when "011" =&gt; display &lt;= "01111010"; -- d
+            when "100" =&gt; display &lt;= "10001110"; -- f
+            when "101" =&gt; display &lt;= "11110110"; -- g
+            when others =&gt; display &lt;= "00000000";
+        end case;
+    end process;
+end architecture bhv;
+</vhdl>
+</project>
